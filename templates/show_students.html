@@ -1,0 +1,47 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<style>
+    body{
+        background-image: url(https://imgs.search.brave.com/y5eMxYri9iWBHFvqmfYMVqc3nTG6pBdB-CXkqwHcgzw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/c3R1ZGVudHMtd29y/a2luZy1vbi1wcm9q/ZWN0LmpwZz93aWR0/aD0xMDAwJmZvcm1h/dD1wanBnJmV4aWY9/MCZpcHRjPTA);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+<div class="container">
+    <center>
+        <table border="4" style="background-color: white;">
+            <tr>
+                <th> Student Name</th>
+                <th>Address</th>
+                <th> Age</th>
+                <th>Date</th>
+                <th> Course name</th>
+                <th>Course fee</th>
+                <th>Action</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.stdname }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.age }}</td>
+            
+                <td>{{ student.date }}</td>
+                <td>{{ student.course.coursename }}</td>
+                <td>{{ student.course.coursefee }}</td>
+                <td>
+                    <a href="{% url 'editstudent' student.id %}" class="btn btn-outline-primary">Edit</a>
+                    <a href="{% url 'delete_student' student.id %}" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if messages %}
+            {% for message in messages %}
+            <p class="message {{ message.tags }}" style="background-color:rgb(239, 23, 23);color:white;">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+
+        </table>
+    </center>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Teacher Profile</h1>
+    <div class="mb-3">
+        <h3>Name: {{ teacher.user.username }}</h3>
+        {% if teacher.image %}
+            <img src="{{ teacher.image.url }}" alt="Profile Image" width="100" class="img-thumbnail"><br>
+        {% endif %}
+        <p><strong>Address:</strong> {{ teacher.address }}</p>
+        <p><strong>Age:</strong> {{ teacher.age }}</p>
+        <p><strong>Contact:</strong> {{ teacher.contact }}</p>
+        <p><strong>Course:</strong> {{ teacher.course.coursename }}</p>
+    </div>
+    <a href="{% url 'edit_teacher' teacher.id %}" class="btn btn-outline-primary">Edit Profile</a>
+</div>
+{% endblock %}

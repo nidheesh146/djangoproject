@@ -1,0 +1,28 @@
+{% extends 'navbar.html' %}
+{% block content %}
+
+<style>
+    .form-group{
+        margin-top: 60px;
+       margin-left: 500px;
+        display:block;
+    }
+    .btn{
+        margin-left: 200px;
+    }
+    body{
+        background-image: url(https://imgs.search.brave.com/PRMphLUd5pcBkoGP51xLYugFOqKOt3Z0e09jypsW9sM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9z/cG9ydHMtY2FyLWRy/aXZpbmctYXNwaGFs/dC1yb2FkLW5pZ2h0/LWdlbmVyYXRpdmUt/YWlfMTg4NTQ0LTgw/NTIuanBnP3NpemU9/NjI2JmV4dD1qcGc);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+<div class="form-group">
+    <h1 style="margin-left: 150px;color:white">Add Course</h1>
+<form action="{% url 'add_course' %}" method="post">
+    {% csrf_token %}
+    <input class="form-control w-50" type="text" name="coursename" placeholder="enter course name"><br>
+    <input class="form-control w-50" type="number" name="coursefee" placeholder="enter course fee"><br>
+    <button class="btn btn-primary " type="submit">Submit</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<style>
+    .container {
+        justify-content: center;
+        margin-top: 60px;
+        background-color:white;
+        width: 30%;
+        border-radius: 17px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+    }
+    body{
+        background-image: url(https://imgs.search.brave.com/hDNZJnZ804HuiYGTiAY7R8szqHbixQMqLPjj2CClSmI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTY1/NjUzMjUzL3Bob3Rv/L2x1eHVyeS1jYXIt/YXQtcHVibGljLWRl/YWxlcnNoaXAuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPU9y/RkNoNEM4TmN0Y2Iy/cUVkRkNLZ083bkVv/Y19MOFNkenlZekdR/VWprRnc9);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<div class="container">
+    <h1 class="h">Add Student</h1>
+
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="{% url 'editstudent' student.id %}">
+        {% csrf_token %}
+        
+        <input type="text" name="stdname" placeholder="Enter name" value="{{ student.stdname }}" required><br><br>
+        <input type="text" name="address" placeholder="Enter address"  value="{{ student.address }}" required><br><br>
+        <input type="number" name="age" placeholder="Enter age" value="{{ student.age }}" required><br><br>
+        <input type="date" name="date" value="{{ student.date|date:'Y-m-d'  }}" required><br><br>
+        
+        <select name="course" required>
+            <option value="">Select a course</option>  <!-- Placeholder option -->
+            {% for course in courses %}
+            <option value="{{ course.id }}" 
+            {% if course.id == student.course.id %} selected {% endif %}
+            >{{ course.coursename }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
